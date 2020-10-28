@@ -2,9 +2,6 @@ require_relative './part_1_solution.rb'
 require 'pry'
 
 def apply_coupons(cart, coupons)
-  # Consult README for inputs and outputs
-  #
-  # REMEMBER: This method **should** update cart
   if coupons.length == 0
     cart
   else
@@ -48,22 +45,9 @@ end
 
 
 def checkout(cart, coupons)
-  # Consult README for inputs and outputs
-  #
-  # This method should call
-  # * consolidate_cart
-  # * apply_coupons
-  # * apply_clearance
-  #
-  # BEFORE it begins the work of calculating the total (or else you might have
-  # some irritated customers
-  #binding.pry
  consolidated = consolidate_cart(cart)
- #binding.pry
  post_coupon = apply_coupons(consolidated, coupons)
-# binding.pry
  post_clearance = apply_clearance(post_coupon)
- #binding.pry
  grand_total = 0
  
  post_clearance.each do |grocery_item|
