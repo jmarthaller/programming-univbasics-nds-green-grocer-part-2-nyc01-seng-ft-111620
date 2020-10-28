@@ -264,6 +264,16 @@ describe "Grocer" do
 
         expect(checkout(cart, [coupons.first, coupons.last])).to eq(22.60)
       end
+      it "calls on #apply_clearance after calling on #apply_coupons with multiple items, coupons, and items are on clearance" do
+        avocado = find_item_by_name_in_collection("AVOCADO", items)
+        cheese =  find_item_by_name_in_collection("CHEESE", items)
+        milk =    find_item_by_name_in_collection("SOY MILK", items)
+
+        cart = [milk, avocado, avocado, cheese, cheese, cheese]
+        #[milk, avocado, avocado, cheese, cheese, cheese]
+
+        expect(checkout(cart, [coupons.first, coupons.last])).to eq(22.60)
+      end
 
       it "calls on #consolidate_cart before calculating the total for two different items" do
         cart = [find_item_by_name_in_collection('CHEESE', items), find_item_by_name_in_collection('BEETS', items)]
