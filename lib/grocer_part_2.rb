@@ -32,31 +32,84 @@ def apply_coupons(cart, coupons)
 end
 
 
+# def apply_clearance(cart)
+#   update_array = []
+#   cart.each do |grocery_item|
+#     if grocery_item[:clearance] == true
+#       grocery_item[:price] = (grocery_item[:price] * 0.8).round(2)
+#     end
+#     update_array << grocery_item
+#   end
+#   update_array
+# end
+
+
+# def checkout(cart, coupons)
+# consolidated = consolidate_cart(cart)
+# post_coupon = apply_coupons(consolidated, coupons)
+# post_clearance = apply_clearance(post_coupon)
+# grand_total = 0
+ 
+# post_clearance.each do |grocery_item|
+#   grand_total += (grocery_item[:price] * grocery_item[:count])
+# end
+  
+# if grand_total > 100
+#   grand_total *= 0.90
+# else 
+#   grand_total
+# end
+# end
+
+
+
+
+
 def apply_clearance(cart)
-  update_array = []
-  cart.each do |grocery_item|
-    if grocery_item[:clearance] == true
-      grocery_item[:price] = (grocery_item[:price] * 0.8).round(2)
+  cart.each do |entry|
+    if entry[:clearance] == true
+      entry[:price] = (entry[:price] * 0.80).round(2)
     end
-    update_array << grocery_item
   end
-  update_array
 end
+
+
 
 
 def checkout(cart, coupons)
- consolidated = consolidate_cart(cart)
- post_coupon = apply_coupons(consolidated, coupons)
- post_clearance = apply_clearance(post_coupon)
- grand_total = 0
- 
- post_clearance.each do |grocery_item|
-   grand_total += (grocery_item[:price] * grocery_item[:count])
- end
-  
- if grand_total > 100
-   grand_total *= 0.90
- else 
-   grand_total
- end
+  consolidated = consolidate_cart(cart)
+  couponed = apply_coupons(consolidated, coupons)
+  clearanced = apply_clearance(couponed)
+  grand_total = 0
+  clearanced.each do |entry|
+    grand_total += entry[:price] * entry[:count]
+  end
+  if grand_total > 100 
+    grand_total *= 0.90
+  end
+  grand_total
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
