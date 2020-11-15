@@ -1,35 +1,32 @@
 require_relative './part_1_solution.rb'
 require 'pry'
 
-# def apply_coupons(cart, coupons)
-#   if coupons.length == 0
-#     cart
-#   else
-#     result = []
-#     cart.each do |grocery_item|
-#       coupons.each do |coupon|
-      
-#         if grocery_item[:item] == coupon[:item]
-#           coupon[:item] = coupon[:item] + " W/COUPON"
-          
-#           if grocery_item[:clearance] == true
-#             coupon[:clearance] = true
-#           else 
-#             coupon[:clearance] = false
-#           end
-          
-#           coupon[:price] = coupon[:cost] / coupon[:num]
-#           coupon[:count] = coupon[:num]
-#           coupon.delete(:cost); coupon.delete(:num)
-#           grocery_item[:count] = grocery_item[:count] - coupon[:count]
-#           result << coupon
-#         end
-#       end
-#       result << grocery_item
-#     end
-#     result
-#   end
-# end
+def apply_coupons(cart, coupons)
+  if coupons.length == 0
+    cart
+  else
+    result = []
+    cart.each do |grocery_item|
+      coupons.each do |coupon|
+        if grocery_item[:item] == coupon[:item]
+          coupon[:item] = coupon[:item] + " W/COUPON"
+          if grocery_item[:clearance] == true
+            coupon[:clearance] = true
+          else 
+            coupon[:clearance] = false
+          end
+          coupon[:price] = coupon[:cost] / coupon[:num]
+          coupon[:count] = coupon[:num]
+          coupon.delete(:cost); coupon.delete(:num)
+          grocery_item[:count] = grocery_item[:count] - coupon[:count]
+          result << coupon
+        end
+      end
+      result << grocery_item
+    end
+    result
+  end
+end
 
 
 # # def apply_clearance(cart)
@@ -94,34 +91,34 @@ require 'pry'
 
 def apply_clearance(cart)
   cart.each do |entry|
-    entry[:price] = (entry[:price] * 0.80).round(2)  if entry[:clearance] == true
+    entry[:price] = (entry[:price] * 0.80).round(2) if entry[:clearance] == true
   end
 end
 
 
-def apply_coupons(cart, coupons)
-  result = []
-  if coupons.length == 0
-    cart
-  else
-    cart.each do |entry|
-      coupons.each do |coupon|
-        if entry[:item] == coupon[:item]
-          coupon[:item] += " W/COUPON"
-          coupon[:count] = coupon[:num]
-          coupon[:clearance] = entry[:clearance]
-          coupon[:price] = coupon[:cost] / coupon[:count]
-          coupon.delete(:cost)
-          coupon.delete(:num)
-          entry[:count] -= coupon[:count]
-          result << coupon
-        end
-      end
-      result << entry
-    end
-     result
-  end
-end
+# def apply_coupons(cart, coupons)
+#   result = []
+#   if coupons.length == 0
+#     cart
+#   else
+#     cart.each do |entry|
+#       coupons.each do |coupon|
+#         if entry[:item] == coupon[:item]
+#           coupon[:item] += " W/COUPON"
+#           coupon[:count] = coupon[:num]
+#           coupon[:clearance] = entry[:clearance]
+#           coupon[:price] = coupon[:cost] / coupon[:count]
+#           coupon.delete(:cost)
+#           coupon.delete(:num)
+#           entry[:count] -= coupon[:count]
+#           result << coupon
+#         end
+#       end
+#       result << entry
+#     end
+#     result
+#   end
+# end
 
 
 
